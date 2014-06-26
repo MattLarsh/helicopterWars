@@ -55,25 +55,15 @@ var createCircleObj = function(e){
   var r = {};
   r.dx = 0;
   r.dy = 0;
-  function update(){
-    r.right = r.cx + r.r;
-    r.left = r.cx - r.r;
-    r.top = r.cy - r.r;
-    r.bottom = r.cy + r.r;
-  }
-  Object.defineProperty(r, 'cx', {
+  Object.defineProperty(r, 'x', {
     get: function(){return e.cx.baseVal.value},
-    set: function(val){e.cx.baseVal.value = val; update();}
+    set: function(val){e.cx.baseVal.value = val;}
   });
-  Object.defineProperty(r, 'cy', {
+  Object.defineProperty(r, 'y', {
     get: function(){return e.cy.baseVal.value},
-    set: function(val){e.cy.baseVal.value = val; update();}
+    set: function(val){e.cy.baseVal.value = val;}
   });
-  Object.defineProperty(r, 'r', {
-    get: function(){return e.r.baseVal.value},
-    set: function(val){e.r.baseVal.value = val; update();}
-  });
-  update();
+  
   return r;
 }
 function createEllipseElement(cx,cy,rx,ry,color,opacity,stroke) {
@@ -92,23 +82,43 @@ var createEllipseObj = function(e){
   var r = {};
   r.dx = 0;
   r.dy = 0;
-  function update(){
-    r.right = r.cx + r.r;
-    r.left = r.cx - r.r;
-    r.top = r.cy - r.r;
-    r.bottom = r.cy + r.r;
-  }
-  Object.defineProperty(r, 'cx', {
+  
+  Object.defineProperty(r, 'x', {
     get: function(){return e.cx.baseVal.value},
-    set: function(val){e.cx.baseVal.value = val; update();}
+    set: function(val){e.cx.baseVal.value = val; }
   });
-  Object.defineProperty(r, 'cy', {
+  Object.defineProperty(r, 'y', {
     get: function(){return e.cy.baseVal.value},
-    set: function(val){e.cy.baseVal.value = val; update();}
+    set: function(val){e.cy.baseVal.value = val; }
   });
+  return r;
+};
+var createRectObject = function(e){
+  var r = {};
+  r.dx = 0;
+  r.dy = 0;
+  
+  Object.defineProperty(r, 'x', {
+    get: function(){return e.x.baseVal.value},
+    set: function(val){e.x.baseVal.value = val; }
+  });
+  Object.defineProperty(r, 'y', {
+    get: function(){return e.y.baseVal.value},
+    set: function(val){e.y.baseVal.value = val; }
+  });
+  return r;
+};
+var createPolyObject = function(e){
+  var r = {};
+  r.dx = 0;
+  r.dy = 0;
+  r.length = e.points.length
+  r.yArr = [];
 
-  update();
-
+  for(var i=0,len=r.length;i<len;i++){
+    e.points[i].y += 7
+  }
+  console.log(r.yArr);
   return r;
 };
 function createRectElement(width,height,x,y,opacity,fill,stroke,rx) {
@@ -128,33 +138,63 @@ function createRectElement(width,height,x,y,opacity,fill,stroke,rx) {
 
 
 
-function createEllipseBlades(){
-  var r = {};
-  r.topBlades = createEllipseElement(195,357.5,100,40 ,'#0f7795',0.5);
-  r.backBlades = createEllipseElement(62.5,402.5,18,18 ,'#0f7795',0.5);
-  return r;
-}
+// function createEllipseBlades(){
+//   var r = {};
+//   r.topBlades = createEllipseElement(195,357.5,100,40 ,'#0f7795',0.5);
+//   r.backBlades = createEllipseElement(62.5,402.5,18,18 ,'#0f7795',0.5);
+//   return r;
+// }
 // createLineElement(x1,x2,y1,y2,strWdth,color)
 // createEllipseElement(cx,cy,rx,ry,color,opacity,stroke)
 // createRectElement(width,height,x,y,opacity,fill,stroke,rx)
 function createHeli(){
   var r = {};
+  r.roundArr = [];
+  r.lineArr = [];
+  r.rectArr = [];
+  
   r.leg1 = createLineElement(175,168,460,485,7,'black');
   r.leg2 = createLineElement(215,208,460,485,7,'black');
   r.legPad = createRectElement(125,7,125,482,1,'black','none',6);
   r.bod = createEllipseElement(195,420,55,50,'white',1,'none');
-  r.invisibleClip1 = createRectElement(57,102,140,368.5,1,'black','none',0);
-  r.invisibleClip2 = createRectElement(62,50,190,420.5,1,'black','none',0);
+  r.invisClip1 = createRectElement(57,102,140,368.5,1,'black','none',0);
+  r.invisClip2 = createRectElement(62,50,190,420.5,1,'black','none',0);
+  r.bladeShadow = createEllipseElement(195,357.5,100,40 ,'#0f7795',0.5);
+  r.smallBladeShadow = createEllipseElement(62.5,402.5,18,18 ,'#0f7795',0.5);
+
+
   r.tail = createPolyElement('65,400 65,410 155,445 155,425',"white");
+  r.polyArr = [r.tail];
   var clip = document.getElementById('clipHeli');
-  clip.appendChild(r.invisibleClip1);
-  clip.appendChild(r.invisibleClip2);
-  r.bod.setAttribute('clip-path', 'url(#clipHeli)')
+  clip.appendChild(r.invisClip1);
+  clip.appendChild(r.invisClip2);
+  r.bod.setAttribute('clip-path', 'url(#clipHeli)');
+
+  r.leg1Obj = createLineObject(r.leg1);
+  r.leg2Obj = createLineObject(r.leg2);
+  r.legPadObj = createRectObject(r.legPad);
+  r.bodObj = createEllipseObj(r.bod);
+  r.invisClip1Obj = createRectObject(r.invisClip1);
+  r.invisClip2Obj = createRectObject(r.invisClip2);
+  r.bladeShadowObj = createEllipseObj(r.bladeShadow);
+  r.smallBladeShadowObj = createEllipseObj(r.smallBladeShadow);
+
+  for(var key in r){
+    if(r[key].dx !== undefined){
+      r.roundArr.push(r[key]);
+    }
+  }
+  for(var key in r){
+    if(r[key].dx1 !== undefined){
+      r.lineArr.push(r[key]);
+    }
+  }
+  
   return r;
 }
 var myHero = createHero();
 var helicopter = createHeli();
-createEllipseBlades();
+// var ellipseBlades = createEllipseBlades();
 
 
 function createHero(){
@@ -182,37 +222,27 @@ function createHero(){
   r.mouthObj = createEllipseObj(r.mouthEle);
   r.hair1Obj = createLineObject(r.hair1Ele);
   r.hair2Obj = createLineObject(r.hair2Ele);
+  for(var key in r){
+    if(r[key].dx !== undefined){
+      r.roundArr.push(r[key]);
+    }
+  }
+  for(var key in r){
+    if(r[key].dx1 !== undefined){
+      r.lineArr.push(r[key]);
+    }
+  }
   return r;
 }
 
-for(var key in myHero){
-  if(myHero[key].dx !== undefined){
-    myHero.roundArr.push(myHero[key]);
-  }
-}
-for(var key in myHero){
-  if(myHero[key].dx1 !== undefined){
-    myHero.lineArr.push(myHero[key]);
-  }
-}
+
+
 
 function moveHeroUp(){
-  for(var i=0;i<myHero.roundArr.length;i++){
-    myHero.roundArr[i].dy = -3;
-  }
-  for(var i=0;i<myHero.lineArr.length;i++){
-    myHero.lineArr[i].dy1 = -3;
-    myHero.lineArr[i].dy2 = -3;
-  }
+  vert = -7
 }
 function moveHeroDown(){
-  for(var i=0;i<myHero.roundArr.length;i++){
-    myHero.roundArr[i].dy = 3;
-  }
-  for(var i=0;i<myHero.lineArr.length;i++){
-    myHero.lineArr[i].dy1 = 3;
-    myHero.lineArr[i].dy2 = 3;
-  }
+  vert = 7;
 }
 function createPolyElement(points,fill,stroke) {
   var newPoly = document.createElementNS(svgNS,"polygon");
@@ -239,10 +269,13 @@ var smallBlade5 = createPolyElement('51,418 61,420 63,403',"#144d5d");
 
 var blades = [blade1,blade2,blade3,blade4,blade5,blade6,blade7,blade8];
 var smallBlades = [smallBlade1,smallBlade2,smallBlade3,smallBlade4,smallBlade5];
+
 document.addEventListener("mousedown", moveHeroUp);
 document.addEventListener("mouseup", moveHeroDown);
 
+var vert = 0;
 function animate(){
+  
   for(var i=0;i<blades.length;i++){
     if(Math.random() > 0.2){
       blades[i].attributes[1].value = 'none';
@@ -263,14 +296,38 @@ function animate(){
   //   myHero.roundArr[i].dy = 1;
   // }
   for(var i=0,len=myHero.roundArr.length;i<len;i++){
-    myHero.roundArr[i].cy += myHero.roundArr[i].dy
+    myHero.roundArr[i].y += vert;
+  }
+  for(var i=0,len=helicopter.roundArr.length;i<len;i++){
+    helicopter.roundArr[i].y += vert;
+  }
+  for(var i=0,len=helicopter.rectArr.length;i<len;i++){
+    helicopter.roundArr[i].y += vert;
+  }
+  for(var i=0;i<helicopter.polyArr.length;i++){
+    for(var j=0;j<helicopter.polyArr[i].points.length;j++){
+      helicopter.polyArr[i].points[j].y += vert;
+    }
+  }
+  for(var i=0;i<blades.length;i++){
+    for(var j=0;j<blades[i].points.length;j++){
+      blades[i].points[j].y += vert;
+    }
+  }
+  for(var i=0;i<smallBlades.length;i++){
+    for(var j=0;j<smallBlades[i].points.length;j++){
+      smallBlades[i].points[j].y += vert;
+    }
   }
   for(var i=0,len=myHero.lineArr.length;i<len;i++){
-    myHero.lineArr[i].y1 += myHero.lineArr[i].dy1
-    myHero.lineArr[i].y2 += myHero.lineArr[i].dy2
+    myHero.lineArr[i].y1 += vert;
+    myHero.lineArr[i].y2 += vert;
   }
 
-
+  for(var i=0,len=helicopter.lineArr.length;i<len;i++){
+    helicopter.lineArr[i].y1 += vert;
+    helicopter.lineArr[i].y2 += vert;
+  }
   requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
