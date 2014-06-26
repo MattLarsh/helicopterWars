@@ -153,17 +153,17 @@ function createHeli(){
   r.lineArr = [];
   r.rectArr = [];
   
-  r.leg1 = createLineElement(175,168,460,485,7,'black');
-  r.leg2 = createLineElement(215,208,460,485,7,'black');
-  r.legPad = createRectElement(125,7,125,482,1,'black','none',6);
-  r.bod = createEllipseElement(195,420,55,50,'white',1,'none');
-  r.invisClip1 = createRectElement(57,102,140,368.5,1,'black','none',0);
-  r.invisClip2 = createRectElement(62,50,190,420.5,1,'black','none',0);
-  r.bladeShadow = createEllipseElement(195,357.5,100,40 ,'#0f7795',0.5);
-  r.smallBladeShadow = createEllipseElement(62.5,402.5,18,18 ,'#0f7795',0.5);
+  r.leg1 = createLineElement(217,210,434,455,4,'black');
+  r.leg2 = createLineElement(245,238,434,455,4,'black');
+  r.legPad = createRectElement(60,4,192,453,1,'black','none',6);
+  r.bod = createEllipseElement(230,420,30,25,'white',1,'none');
+  r.invisClip1 = createRectElement(90,137,140,368.5,1,'black','none',0);
+  r.invisClip2 = createRectElement(97,85,190,420.5,1,'black','none',0);
+  r.bladeShadow = createEllipseElement(230,365,80,40 ,'#0f7795',0.5);
+  r.smallBladeShadow = createEllipseElement(117.5,394,18,18 ,'#0f7795',0.5);
 
 
-  r.tail = createPolyElement('65,400 65,410 155,445 155,425',"white");
+  r.tail = createPolyElement('120,390 120,395 210,432 210,419',"white");
   r.polyArr = [r.tail];
   var clip = document.getElementById('clipHeli');
   clip.appendChild(r.invisClip1);
@@ -196,24 +196,26 @@ var myHero = createHero();
 var helicopter = createHeli();
 // var ellipseBlades = createEllipseBlades();
 
-
+// createLineElement(x1,x2,y1,y2,strWdth,color)
+// createEllipseElement(cx,cy,rx,ry,color,opacity,stroke)
+// createRectElement(width,height,x,y,opacity,fill,stroke,rx)
 function createHero(){
   var r = {};
   r.roundArr = [];
   r.lineArr = [];
-  r.torso1Ele = createLineElement(199,248,422.5,422.5,15,'#BD2C06');
-  r.torso2Ele = createLineElement(208,240,427,427,30,'#BD2C06');
-  r.headEle = createCircleElement(225,405,22,'#FFE1CE');
-  r.leftEyeEle = createEllipseElement(220,402,7,9,'white');
-  r.rightEyeEle = createEllipseElement(230,402,7,9,'white');
-  r.leftEyeColorEle = createEllipseElement(221,402,1.5,1.5,'#1E181A');
-  r.rightEyeColorEle = createEllipseElement(233,402,1.5,1.5,'#1E181A');
-  r.mouthEle = createEllipseElement(225,417,3,3,'#1E181A');
-  r.hair1Ele = createLineElement(205,202,388,410,6,'#D1A967');
-  r.hair2Ele = createLineElement(205,244,387,383,10,'#D1A967');
+  r.torso1Ele = createLineElement(228,259,422.5,422.5,8,'#BD2C06');
+  // r.torso2Ele = createLineElement(233,255,433,433,20,'#BD2C06');
+  r.headEle = createCircleElement(245,410,15,'#FFE1CE');
+  r.leftEyeEle = createEllipseElement(242,408,4.75,6,'white');
+  r.rightEyeEle = createEllipseElement(248,408,4.75,6,'white');
+  r.leftEyeColorEle = createEllipseElement(243,408,1,1,'#1E181A');
+  r.rightEyeColorEle = createEllipseElement(250,408,1,1,'#1E181A');
+  r.mouthEle = createEllipseElement(245,418,2,2,'#1E181A');
+  r.hair1Ele = createLineElement(233,230,397,412,4,'#D1A967');
+  r.hair2Ele = createLineElement(232,259,397,393,7,'#D1A967');
 
   r.torso1Obj = createLineObject(r.torso1Ele);
-  r.torso2Obj = createLineObject(r.torso2Ele);
+  // r.torso2Obj = createLineObject(r.torso2Ele);
   r.headObj = createCircleObj(r.headEle);
   r.leftEyeObj = createEllipseObj(r.leftEyeEle);
   r.rightEyeObj = createEllipseObj(r.rightEyeEle);
@@ -252,23 +254,22 @@ function createPolyElement(points,fill,stroke) {
   document.getElementById("field").appendChild(newPoly);
   return newPoly;
 }
-var blade1 = createPolyElement('95.5,353 95.5,366 195,358',"#194C7F");
-var blade2 = createPolyElement('148,322 125,329 195,358',"#194C7F");
-var blade3 = createPolyElement('175,318 200,318 195,358',"#194C7F");
-var blade4 = createPolyElement('230,322 260,327 195,358',"#194C7F");
-var blade5 = createPolyElement('285,340 294,350 195,358',"#194C7F");
-var blade6 = createPolyElement('285,375 270,385 195,358',"#194C7F");
-var blade7 = createPolyElement('205,398 225,396 195,358',"#194C7F");
-var blade8 = createPolyElement('125,387 150,394 195,358',"#194C7F");
+var blade1 = createPolyElement('153,353 153,366 232,364',"#194C7F");
+var blade2 = createPolyElement('203,327 180,334 232,364',"#194C7F");
+var blade3 = createPolyElement('245,328 270,331 232,364',"#194C7F");
+var blade4 = createPolyElement('303,353 306,366 232,364',"#194C7F");
+var blade5 = createPolyElement('285,390 270,400 232,364',"#194C7F");
+var blade6 = createPolyElement('225,404 245,404 232,364',"#194C7F");
+var blade7 = createPolyElement('165,387 190,394 232,364',"#194C7F");
 
-var smallBlade1 = createPolyElement('45,407 45,398 63,403',"#144d5d");
-var smallBlade2 = createPolyElement('50,390 58,385 63,403',"#144d5d");
-var smallBlade3 = createPolyElement('73,388 79,398 63,403',"#144d5d");
-var smallBlade4 = createPolyElement('79,410 72,418 63,403',"#144d5d");
-var smallBlade5 = createPolyElement('51,418 61,420 63,403',"#144d5d");
+var smallBlade1 = createPolyElement('100,397 100,388 118,394',"#194C7F");
+var smallBlade2 = createPolyElement('118,377 128,378 118,394',"#194C7F");
+var smallBlade3 = createPolyElement('134,396 130,404 118,394',"#194C7F");
+var smallBlade4 = createPolyElement('110,410 117,413 118,394',"#194C7F");
 
-var blades = [blade1,blade2,blade3,blade4,blade5,blade6,blade7,blade8];
-var smallBlades = [smallBlade1,smallBlade2,smallBlade3,smallBlade4,smallBlade5];
+var blades = [blade1,blade2,blade3,blade4,blade5,blade6,blade7];
+var smallBlades = [smallBlade1,smallBlade2,smallBlade3,smallBlade4];
+console.log(blades[0].points);
 
 document.addEventListener("mousedown", moveHeroUp);
 document.addEventListener("mouseup", moveHeroDown);
@@ -285,16 +286,14 @@ function animate(){
     } 
   }
   for(var i=0;i<smallBlades.length;i++){
-    if(Math.random() > 0.3){
+    if(Math.random() > 0.15){
       smallBlades[i].attributes[1].value = 'none';
     }
     else{
       smallBlades[i].attributes[1].value = '#144d5d';
     }   
   }
-  // for(var i=0;i<myHero.roundArr.length;i++){
-  //   myHero.roundArr[i].dy = 1;
-  // }
+  
   for(var i=0,len=myHero.roundArr.length;i<len;i++){
     myHero.roundArr[i].y += vert;
   }
