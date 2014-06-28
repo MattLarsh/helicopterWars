@@ -134,16 +134,6 @@ function createRectElement(width,height,x,y,opacity,fill,stroke,rx) {
   document.getElementById("field").appendChild(newRect);
   return newRect;
 }
-
-
-
-
-// function createEllipseBlades(){
-//   var r = {};
-//   r.topBlades = createEllipseElement(195,357.5,100,40 ,'#0f7795',0.5);
-//   r.backBlades = createEllipseElement(62.5,402.5,18,18 ,'#0f7795',0.5);
-//   return r;
-// }
 // createLineElement(x1,x2,y1,y2,strWdth,color)
 // createEllipseElement(cx,cy,rx,ry,color,opacity,stroke)
 // createRectElement(width,height,x,y,opacity,fill,stroke,rx)
@@ -153,18 +143,19 @@ function createHeli(){
   r.lineArr = [];
   r.rectArr = [];
   
-  r.leg1 = createLineElement(217,210,434,455,4,'black');
-  r.leg2 = createLineElement(245,238,434,455,4,'black');
-  r.legPad = createRectElement(60,4,192,453,1,'black','none',6);
-  r.bod = createEllipseElement(230,420,30,25,'white',1,'none');
-  r.invisClip1 = createRectElement(90,137,140,368.5,1,'black','none',0);
+  r.leg1 = createLineElement(217,210,434,455,4,'white');
+  r.leg2 = createLineElement(245,238,434,455,4,'white');
+  r.post = createPolyElement('220,400 231,365 233,365 237,400',"white");
+  r.legPad = createRectElement(60,4,192,453,1,'white','none',6);
+  r.bod = createEllipseElement(230,420,40,25,'white',1,'none');
+  r.invisClip1 = createRectElement(97,137,140,368.5,1,'black','none',0);
   r.invisClip2 = createRectElement(97,85,190,420.5,1,'black','none',0);
-  r.bladeShadow = createEllipseElement(230,365,80,40 ,'#0f7795',0.5);
+  r.bladeShadow = createEllipseElement(230,365,90,30 ,'#0f7795',0.5);
   r.smallBladeShadow = createEllipseElement(117.5,394,18,18 ,'#0f7795',0.5);
 
 
   r.tail = createPolyElement('120,390 120,395 210,432 210,419',"white");
-  r.polyArr = [r.tail];
+  r.polyArr = [r.tail,r.post];
   var clip = document.getElementById('clipHeli');
   clip.appendChild(r.invisClip1);
   clip.appendChild(r.invisClip2);
@@ -192,9 +183,12 @@ function createHeli(){
   
   return r;
 }
-var myHero = createHero();
-var helicopter = createHeli();
-// var ellipseBlades = createEllipseBlades();
+
+// console.log(helicopter.bod.);
+
+
+
+// helicopter.bod.setAttribute("transform","translate(-70,-50)rotate(-20)");
 
 // createLineElement(x1,x2,y1,y2,strWdth,color)
 // createEllipseElement(cx,cy,rx,ry,color,opacity,stroke)
@@ -203,17 +197,17 @@ function createHero(){
   var r = {};
   r.roundArr = [];
   r.lineArr = [];
-  r.torso1Ele = createLineElement(228,259,422.5,422.5,8,'#BD2C06');
+  r.torso1Ele = createLineElement(236,267,422.5,422.5,8,'#BD2C06');
   // r.torso2Ele = createLineElement(233,255,433,433,20,'#BD2C06');
-  r.headEle = createCircleElement(245,410,15,'#FFE1CE');
-  r.leftEyeEle = createEllipseElement(242,408,4.75,6,'white');
-  r.rightEyeEle = createEllipseElement(248,408,4.75,6,'white');
-  r.leftEyeColorEle = createEllipseElement(243,408,1,1,'#1E181A');
-  r.rightEyeColorEle = createEllipseElement(250,408,1,1,'#1E181A');
-  r.mouthEle = createEllipseElement(245,418,2,2,'#1E181A');
-  r.hair1Ele = createLineElement(233,230,397,412,4,'#D1A967');
-  r.hair2Ele = createLineElement(232,259,397,393,7,'#D1A967');
-
+  r.headEle = createCircleElement(253,410,15,'#FFE1CE');
+  r.leftEyeEle = createEllipseElement(250,408,4.75,6,'white');
+  r.rightEyeEle = createEllipseElement(256,408,4.75,6,'white');
+  r.leftEyeColorEle = createEllipseElement(251,408,1,1,'#1E181A');
+  r.rightEyeColorEle = createEllipseElement(258,408,1,1,'#1E181A');
+  r.mouthEle = createEllipseElement(253,418,2,2,'#1E181A');
+  r.hair1Ele = createLineElement(241,238,397,412,4,'#D1A967');
+  r.hair2Ele = createLineElement(240,267,397,393,7,'#D1A967');
+  
   r.torso1Obj = createLineObject(r.torso1Ele);
   // r.torso2Obj = createLineObject(r.torso2Ele);
   r.headObj = createCircleObj(r.headEle);
@@ -236,9 +230,34 @@ function createHero(){
   }
   return r;
 }
+function createBirdEle(){
+  r = {};
+  createBirdEle.state = 'alive';
+  r.birdBodEle = createEllipseElement(812,408,18,15,'#D8B67C');
+  r.birdEyeEle = createEllipseElement(804,402,4.75,6,'white');
+  r.birdEyeColorEle = createEllipseElement(803,403,1,1,'#1E181A');
+  r.birdBeakEle = createPolyElement('785,404 798,412 798,402',"orange");
+  r.birdWingEle = createPolyElement('845,409 812,415 812,402',"#695B5A");
 
-
-
+  return r;
+}
+function createBirdObj(){
+  r = {}
+  r.roundArr = [];
+  r.polyArr = [birdEle.birdBeakEle,birdEle.birdWingEle];
+  r.birdBodObj = createEllipseObj(birdEle.birdBodEle);
+  r.birdEyeObj = createEllipseObj(birdEle.birdEyeEle);
+  r.birdEyeColorObj = createEllipseObj(birdEle.birdEyeColorEle);
+  r.polyArr = [birdEle.birdBeakEle,birdEle.birdWingEle];
+  for(var key in r){
+    if(r[key].dx !== undefined){
+      r.roundArr.push(r[key]);
+    }
+  }
+  return r;
+}
+var birdEle = createBirdEle();
+var birdObj = createBirdObj();
 
 function moveHeroUp(){
   vert = -7
@@ -254,13 +273,14 @@ function createPolyElement(points,fill,stroke) {
   document.getElementById("field").appendChild(newPoly);
   return newPoly;
 }
-var blade1 = createPolyElement('153,353 153,366 232,364',"#194C7F");
-var blade2 = createPolyElement('203,327 180,334 232,364',"#194C7F");
-var blade3 = createPolyElement('245,328 270,331 232,364',"#194C7F");
-var blade4 = createPolyElement('303,353 306,366 232,364',"#194C7F");
-var blade5 = createPolyElement('285,390 270,400 232,364',"#194C7F");
-var blade6 = createPolyElement('225,404 245,404 232,364',"#194C7F");
-var blade7 = createPolyElement('165,387 190,394 232,364',"#194C7F");
+var blade1 = createPolyElement('149,353 142,366 231.5,364',"#194C7F");
+var blade2 = createPolyElement('203,337 180,340 231.5,364',"#194C7F");
+var blade3 = createPolyElement('245,335 270,338 231.5,364',"#194C7F");
+var blade4 = createPolyElement('312,353 319,366 231.5,364',"#194C7F");
+var blade5 = createPolyElement('304,380 275,392 231.5,364',"#194C7F");
+var blade6 = createPolyElement('225,395 245,395 231.5,364',"#194C7F");
+var blade7 = createPolyElement('165,385 190,393 231.5,364',"#194C7F");
+
 
 var smallBlade1 = createPolyElement('100,397 100,388 118,394',"#194C7F");
 var smallBlade2 = createPolyElement('118,377 128,378 118,394',"#194C7F");
@@ -269,14 +289,32 @@ var smallBlade4 = createPolyElement('110,410 117,413 118,394',"#194C7F");
 
 var blades = [blade1,blade2,blade3,blade4,blade5,blade6,blade7];
 var smallBlades = [smallBlade1,smallBlade2,smallBlade3,smallBlade4];
-console.log(blades[0].points);
+
 
 document.addEventListener("mousedown", moveHeroUp);
 document.addEventListener("mouseup", moveHeroDown);
 
 var vert = 0;
+var grass = document.getElementById('grass');
+function removeEle(obj){
+  for(var key in obj){
+    if(obj[key] != undefined){
+      obj[key].remove();
+      delete obj[key];
+    } 
+  }
+  createBirdEle.state = 'dead';
+  birdEle = createBirdEle();
+  birdObj = createBirdObj();
+}
+// function birdReset(){
+//   birdObj = 
+//   birdObj.birdBodObj.x = 450;
+// }
+  var myHero = createHero();
+  var helicopter = createHeli();
 function animate(){
-  
+   
   for(var i=0;i<blades.length;i++){
     if(Math.random() > 0.2){
       blades[i].attributes[1].value = 'none';
@@ -327,6 +365,24 @@ function animate(){
     helicopter.lineArr[i].y1 += vert;
     helicopter.lineArr[i].y2 += vert;
   }
+  
+  // Birds!!! Birds!!! Birds!!!
+  if(createBirdEle.state === 'alive'){
+    
+    if(birdObj.birdBodObj.x < 150){
+      removeEle(birdEle);
+    }
+    for(var i=0;i<birdObj.polyArr.length;i++){
+      
+      for(var j=0;j<birdObj.polyArr[i].points.length;j++){
+        birdObj.polyArr[i].points[j].x -= 5;
+      }
+    }
+    for(var i=0,len=birdObj.roundArr.length;i<len;i++){
+      birdObj.roundArr[i].x -= 5;
+    }
+  }
+  // Birds!!! Birds!!! Birds!!!
   requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
