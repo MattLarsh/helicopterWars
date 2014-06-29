@@ -1,154 +1,4 @@
-(function () {
-    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-    window.requestAnimationFrame = requestAnimationFrame;
-})();
 
-var svgNS = "http://www.w3.org/2000/svg";
-
-function createLineElement(x1,x2,y1,y2,strWdth,color) {
-  var newLine = document.createElementNS(svgNS,"line");
-  newLine.setAttributeNS(null,"x1",x1); 
-  newLine.setAttributeNS(null,"x2",x2);   
-  newLine.setAttributeNS(null,"y1",y1);   
-  newLine.setAttributeNS(null,"y2",y2); 
-  newLine.setAttributeNS(null,"stroke",color);    
-  newLine.setAttributeNS(null,"stroke-width", strWdth);
-  document.getElementById("field").appendChild(newLine);
-  return newLine;
-}
-var createLineObject = function(e){
-  var r = {};
-  r.dx1 = 0;
-  r.dx2 = 0;
-  r.dy1 = 0;
-  r.dy2 = 0;
-  Object.defineProperty(r, 'x1', {
-    get: function(){return e.x1.baseVal.value},
-    set: function(val){e.x1.baseVal.value = val;}
-  });
-  Object.defineProperty(r, 'x2', {
-    get: function(){return e.x2.baseVal.value},
-    set: function(val){e.x2.baseVal.value = val;}
-  });
-  Object.defineProperty(r, 'y1', {
-    get: function(){return e.y1.baseVal.value},
-    set: function(val){e.y1.baseVal.value = val;}
-  });
-  Object.defineProperty(r, 'y2', {
-    get: function(){return e.y2.baseVal.value},
-    set: function(val){e.y2.baseVal.value = val;}
-  });
-  return r;
-};
-function createCircleElement(cx,cy,r,color) {
-  var newCircle = document.createElementNS(svgNS,"circle");
-  newCircle.setAttributeNS(null,"cx",cx);  
-  newCircle.setAttributeNS(null,"cy",cy);    
-  newCircle.setAttributeNS(null,"r",r);      
-  newCircle.setAttributeNS(null,"fill",color);   
-  document.getElementById("field").appendChild(newCircle);
-  return newCircle;
-}
-
-var createCircleObj = function(e){
-  var r = {};
-  r.dx = 0;
-  r.dy = 0;
-  r.r = e.r.baseVal.value;
-  
-  function update(){
-    r.right = r.x + r.r;
-    r.left = r.x - r.r;
-    r.top = r.y - r.r;
-    r.bottom = r.y + r.r;
-  }
-  Object.defineProperty(r, 'x', {
-    get: function(){return e.cx.baseVal.value},
-    set: function(val){e.cx.baseVal.value = val; update()}
-  });
-  Object.defineProperty(r, 'y', {
-    get: function(){return e.cy.baseVal.value},
-    set: function(val){e.cy.baseVal.value = val; update()}
-  });
-  update();
-  return r;
-}
-function createEllipseElement(cx,cy,rx,ry,color,opacity,stroke) {
-  var newEllipse = document.createElementNS(svgNS,"ellipse");
-  newEllipse.setAttributeNS(null,"cx",cx);  
-  newEllipse.setAttributeNS(null,"cy",cy);    
-  newEllipse.setAttributeNS(null,"rx",rx);  
-  newEllipse.setAttributeNS(null,"ry",ry);    
-  newEllipse.setAttributeNS(null,"fill",color);
-  newEllipse.setAttributeNS(null,"fill-opacity",opacity); 
-  newEllipse.setAttributeNS(null,"stroke",stroke);    
-  document.getElementById("field").appendChild(newEllipse);
-  return newEllipse;
-}
-var createEllipseObj = function(e){
-  var r = {};
-  r.dx = 0;
-  r.dy = 0;
-  r.r = e.ry.baseVal.value; 
-  function update(){
-    r.right = r.x + r.r;
-    r.left = r.x - r.r;
-    r.top = r.y - r.r;
-    r.bottom = r.y + r.r;
-  }
-  Object.defineProperty(r, 'x', {
-    get: function(){return e.cx.baseVal.value},
-    set: function(val){e.cx.baseVal.value = val; update()}
-  });
-  Object.defineProperty(r, 'y', {
-    get: function(){return e.cy.baseVal.value},
-    set: function(val){e.cy.baseVal.value = val; update()}
-  });
-  update()
-  return r;
-};
-var createRectObject = function(e){
-  var r = {};
-  r.dx = 0;
-  r.dy = 0;
-  
-  Object.defineProperty(r, 'x', {
-    get: function(){return e.x.baseVal.value},
-    set: function(val){e.x.baseVal.value = val; }
-  });
-  Object.defineProperty(r, 'y', {
-    get: function(){return e.y.baseVal.value},
-    set: function(val){e.y.baseVal.value = val; }
-  });
-  return r;
-};
-var createPolyObject = function(e){
-  var r = {};
-  r.dx = 0;
-  r.dy = 0;
-  r.length = e.points.length
-  r.yArr = [];
-
-  for(var i=0,len=r.length;i<len;i++){
-    e.points[i].y += 7
-  }
-  console.log(r.yArr);
-  return r;
-};
-function createRectElement(width,height,x,y,opacity,fill,stroke,rx) {
-  var newRect = document.createElementNS(svgNS,"rect");
-  newRect.setAttributeNS(null,"width",width); 
-  newRect.setAttributeNS(null,"height",height);    
-  newRect.setAttributeNS(null,"x",x);   
-  newRect.setAttributeNS(null,"y",y);  
-  newRect.setAttributeNS(null,"fill-opacity",opacity);    
-  newRect.setAttributeNS(null,"fill",fill);
-  newRect.setAttributeNS(null,"rx",rx);
-  newRect.setAttributeNS(null,"stroke",stroke);
-  document.getElementById("field").appendChild(newRect);
-  return newRect;
-}
 // createLineElement(x1,x2,y1,y2,strWdth,color)
 // createEllipseElement(cx,cy,rx,ry,color,opacity,stroke)
 // createRectElement(width,height,x,y,opacity,fill,stroke,rx)
@@ -195,13 +45,8 @@ function createHeli(){
       r.lineArr.push(r[key]);
     }
   }
-  
   return r;
 }
-
-// console.log(helicopter.bod.);
-
-
 
 // helicopter.bod.setAttribute("transform","translate(-70,-50)rotate(-20)");
 
@@ -245,60 +90,10 @@ function createHero(){
   }
   return r;
 }
-function createBirdEle(){
-  r = {};
-  createBirdEle.state = 'alive';
-  r.birdBodEle = createEllipseElement(812,408,18,15,'#D8B67C');
-  r.birdEyeEle = createEllipseElement(804,402,4.75,6,'white');
-  r.birdEyeColorEle = createEllipseElement(803,403,1,1,'#1E181A');
-  r.birdBeakEle = createPolyElement('785,404 798,412 798,402',"orange");
-  r.birdWingEle = createPolyElement('845,409 812,415 812,402',"#695B5A");
 
-  return r;
-}
-function createBirdObj(){
-  r = {}
-  r.polyPower = 0
-  r.roundArr = [];
-  r.bloodEleArr = [];
-  r.bloodObjArr = [];
-  r.polyArr = [birdEle.birdBeakEle,birdEle.birdWingEle];
-  r.birdBodObj = createEllipseObj(birdEle.birdBodEle);
-  r.birdEyeObj = createEllipseObj(birdEle.birdEyeEle);
-  r.birdEyeColorObj = createEllipseObj(birdEle.birdEyeColorEle);
-  r.polyArr = [birdEle.birdBeakEle,birdEle.birdWingEle];
-  for(var key in r){
-    if(r[key].dx !== undefined){
-      r.roundArr.push(r[key]);
-    }
-  }
-  return r;
-}
-var birdEle = createBirdEle();
-var birdObj = createBirdObj();
-
-function birdExplosion(){
-  var x;
-  for(var i=0,len=birdObj.roundArr.length;i<len;i++){
-    if(Math.random() > 0.5){
-      x = 14;
-    }
-    else{
-      x = -14;
-    }
-    birdObj.roundArr[i].dx = x * Math.random();
-    birdObj.roundArr[i].dy = x * Math.random();
-  }
-  if(Math.random() > 0.5){
-      birdObj.polyPower = 14;
-  }
-  else{
-    birdObj.polyPower = 14;
-  }
-}
 function createBlood(eleArr,objArr,x,y){
   for(var i=0;i<100;i++){
-    eleArr[i] = createEllipseElement(x,y,2,2,'red');
+    eleArr[i] = createEllipseElement(x,y,3,3,'red');
   }
   for(var i=0;i<100;i++){
     objArr[i] = createEllipseObj(eleArr[i]);
@@ -309,16 +104,16 @@ function bloodExplosion(objArr){
   var y;
   for(var i=0,len=objArr.length;i<len;i++){
     if(Math.random() > 0.5){
-      x = 100;
+      x = 99;
     }
     else{
-      x = -100;
+      x = -99;
     }
     if(Math.random() < 0.5){
-      y = 100;
+      y = 99;
     }
     else{
-      y = -100;
+      y = -99;
     }
     objArr[i].dx = x * Math.random();
     objArr[i].dy = y * Math.random();
@@ -368,119 +163,14 @@ function removeEle(obj){
       delete obj[key];
     } 
   }
-  createBirdEle.state = 'dead';
-  birdEle = createBirdEle();
-  birdObj = createBirdObj();
-}
-// function birdReset(){
-//   birdObj = 
-//   birdObj.birdBodObj.x = 450;
-// }
-function collideoneWith(one,two) {
-  // console.log(two.right);
-  if(one.bottom > two.top && one.top < two.bottom &&
-     one.right > two.left && one.left < two.right){
-    birdExplosion();
-    createBlood(birdObj.bloodEleArr,birdObj.bloodObjArr,310,400);
-    bloodExplosion(birdObj.bloodObjArr);
-    createBirdEle.state = 'dead';
-    // removeEle(birdEle);
-  }
+  
 }
 
-
-
   
-  var myHero = createHero();
-  var helicopter = createHeli();
-  console.log(birdObj.birdBodObj)
-function animate(){
-  collideoneWith(helicopter.bladeShadowObj,birdObj.birdBodObj);
-  for(var i=0;i<blades.length;i++){
-    if(Math.random() > 0.2){
-      blades[i].attributes[1].value = 'none';
-    }
-    else{
-      blades[i].attributes[1].value = '#144d5d';
-    } 
-  }
-  for(var i=0;i<smallBlades.length;i++){
-    if(Math.random() > 0.15){
-      smallBlades[i].attributes[1].value = 'none';
-    }
-    else{
-      smallBlades[i].attributes[1].value = '#144d5d';
-    }   
-  }
+var myHero = createHero();
+var helicopter = createHeli();
   
-  for(var i=0,len=myHero.roundArr.length;i<len;i++){
-    myHero.roundArr[i].y += vert;
-  }
-  for(var i=0,len=helicopter.roundArr.length;i<len;i++){
-    helicopter.roundArr[i].y += vert;
-  }
-  for(var i=0,len=helicopter.rectArr.length;i<len;i++){
-    helicopter.roundArr[i].y += vert;
-  }
-  for(var i=0;i<helicopter.polyArr.length;i++){
-    for(var j=0;j<helicopter.polyArr[i].points.length;j++){
-      helicopter.polyArr[i].points[j].y += vert;
-    }
-  }
-  for(var i=0;i<blades.length;i++){
-    for(var j=0;j<blades[i].points.length;j++){
-      blades[i].points[j].y += vert;
-    }
-  }
-  for(var i=0;i<smallBlades.length;i++){
-    for(var j=0;j<smallBlades[i].points.length;j++){
-      smallBlades[i].points[j].y += vert;
-    }
-  }
-  for(var i=0,len=myHero.lineArr.length;i<len;i++){
-    myHero.lineArr[i].y1 += vert;
-    myHero.lineArr[i].y2 += vert;
-  }
 
-  for(var i=0,len=helicopter.lineArr.length;i<len;i++){
-    helicopter.lineArr[i].y1 += vert;
-    helicopter.lineArr[i].y2 += vert;
-  }
-  
-  // Birds!!! Birds!!! Birds!!!
-  if(createBirdEle.state === 'alive'){
-    for(var i=0;i<birdObj.polyArr.length;i++){
-      for(var j=0;j<birdObj.polyArr[i].points.length;j++){
-        birdObj.polyArr[i].points[j].x -= 5;
-      }
-    }
-    for(var i=0,len=birdObj.roundArr.length;i<len;i++){
-      birdObj.roundArr[i].x -= 5;
-    }
-    if(birdObj.birdBodObj.x < 300){
-      
-    }
-  }
-  if(createBirdEle.state === 'dead'){
-    for(var i=0,len=birdObj.roundArr.length;i<len;i++){
-      birdObj.roundArr[i].x += birdObj.roundArr[i].dx;
-      birdObj.roundArr[i].y += birdObj.roundArr[i].dx;
-    }
-    for(var i=0;i<birdObj.polyArr.length;i++){
-      for(var j=0;j<birdObj.polyArr[i].points.length;j++){
-        birdObj.polyArr[i].points[j].y += birdObj.polyPower;
-      }
-    }
-    for(var i=0;i<100;i++){
-      birdObj.bloodObjArr[i].x += birdObj.bloodObjArr[i].dx;
-      birdObj.bloodObjArr[i].y += birdObj.bloodObjArr[i].dy;
-    }
-  }
-
-  // Birds!!! Birds!!! Birds!!!
-  requestAnimationFrame(animate)
-}
-requestAnimationFrame(animate)
 
 
 
