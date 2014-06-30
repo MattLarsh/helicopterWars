@@ -55,6 +55,7 @@ function createHeli(){
 // createRectElement(width,height,x,y,opacity,fill,stroke,rx)
 function createHero(){
   var r = {};
+  r.state = 'alive';
   r.roundArr = [];
   r.lineArr = [];
   r.torso1Ele = createLineElement(236,267,422.5,422.5,8,'#BD2C06');
@@ -92,10 +93,10 @@ function createHero(){
 }
 
 function createBlood(eleArr,objArr,x,y){
-  for(var i=0;i<100;i++){
+  for(var i=0;i<50;i++){
     eleArr[i] = createEllipseElement(x,y,3,3,'red');
   }
-  for(var i=0;i<100;i++){
+  for(var i=0;i<50;i++){
     objArr[i] = createEllipseObj(eleArr[i]);
   } 
 }
@@ -120,10 +121,12 @@ function bloodExplosion(objArr){
   }
 }
 function moveHeroUp(){
-  vert = -7
+  myHero.status = 'up';
+  vert = -8;
 }
 function moveHeroDown(){
-  vert = 7;
+  vert = 9;
+  myHero.status = 'down';
 }
 function createPolyElement(points,fill,stroke) {
   var newPoly = document.createElementNS(svgNS,"polygon");
@@ -149,7 +152,7 @@ var smallBlade4 = createPolyElement('110,410 117,413 118,394',"#194C7F");
 
 var blades = [blade1,blade2,blade3,blade4,blade5,blade6,blade7];
 var smallBlades = [smallBlade1,smallBlade2,smallBlade3,smallBlade4];
-
+var bladeX;
 
 document.addEventListener("mousedown", moveHeroUp);
 document.addEventListener("mouseup", moveHeroDown);
@@ -163,10 +166,9 @@ function removeEle(obj){
       delete obj[key];
     } 
   }
-  
 }
 
-  
+
 var myHero = createHero();
 var helicopter = createHeli();
   

@@ -93,7 +93,7 @@ var createEllipseObj = function(e){
   r.rx = e.rx.baseVal.value; 
   r.ry = e.ry.baseVal.value;
   function update(){
-    r.right = r.x + (r.rx/2);
+    r.right = r.x + r.rx;
     r.left = r.x - r.rx;
     r.top = r.y - r.ry;
     r.bottom = r.y + r.ry;

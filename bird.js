@@ -11,7 +11,7 @@ function createBirdEle(){
 }
 function createBirdObj(){
   r = {}
-  r.polyPower = 10 * Math.random();
+  r.polyPower = 10 * Math.random() + 2;
   r.roundArr = [];
   r.bloodEleArr = [];
   r.bloodObjArr = [];

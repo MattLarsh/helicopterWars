@@ -13,6 +13,28 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/bird.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bird.js",
+		"outputAbbreviatedPath": "\/min\/bird-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/iceBlocks.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/iceBlocks.js",
+		"outputAbbreviatedPath": "\/min\/iceBlocks-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/index.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -44,12 +66,23 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/min\/hi-ck.js": {
+	"\/min\/bird-ck.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/min\/hi-ck.js",
-		"outputAbbreviatedPath": "\/min\/min\/hi-ck-ck.js",
+		"inputAbbreviatedPath": "\/min\/bird-ck.js",
+		"outputAbbreviatedPath": "\/min\/min\/bird-ck-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/min\/iceBlocks-ck.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/min\/iceBlocks-ck.js",
+		"outputAbbreviatedPath": "\/min\/min\/iceBlocks-ck-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -61,6 +94,28 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/min\/main-ck.js",
 		"outputAbbreviatedPath": "\/min\/min\/main-ck-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/min\/shapeFunctions-ck.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/min\/shapeFunctions-ck.js",
+		"outputAbbreviatedPath": "\/min\/min\/shapeFunctions-ck-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/shapeFunctions.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/shapeFunctions.js",
+		"outputAbbreviatedPath": "\/min\/shapeFunctions-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
